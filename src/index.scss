@@ -1,5 +1,3 @@
-@import "common/assets/scss/variables.sass";
-
 *{
   padding: 0;
   margin: 0;
@@ -14,7 +12,7 @@
 a,a:focus,a:active{
   outline: none;
   text-decoration:none;
-  color: $primaryColor;
+  color: var(--primaryColor);
 }
 
 nav,footer,header,aside{display: block;}
@@ -25,8 +23,8 @@ html,body{
   -webkit-text-size-adjust: 100%;
 
   font-family: 'Inter', sans-serif;
-  background-color: $backgroundColor;
-  color: $primaryColor;
+  background-color: var(--background);
+  color: var(--primaryColor);
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
@@ -42,3 +40,9 @@ ul li{list-style: none;}
 img{vertical-align: top;}
 
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
+
+:root {
+  --primaryColor: #000000;
+  --secondaryColor: #5E96FC;
+  --background: #F7F7F8;
+}

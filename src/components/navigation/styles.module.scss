@@ -1,5 +1,4 @@
 @import "../../common/assets/scss/mixins";
-@import "../../common/assets/scss/variables";
 
 .nav {
   margin: auto;
@@ -12,7 +11,7 @@
     }
 
     .active {
-      color: $secondaryColor;
+      color: var(--secondaryColor);
     }
   }
 }
