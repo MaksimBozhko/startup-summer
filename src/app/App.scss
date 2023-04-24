@@ -1,0 +1,10 @@
+@import "../common/assets/scss/mixins";
+@import "../common/assets/scss/variables";
+
+.main {
+  min-height: 100vh;
+}
+
+.root {
+  @include PageContainer
+}
