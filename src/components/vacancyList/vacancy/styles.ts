@@ -1,7 +1,8 @@
 import { createStyles } from "@mantine/core"
 
-export const useStyles = createStyles(() => ({
+export const useStyles = createStyles((theme) => ({
   paper: {
+    maxWidth: "773px",
     width: "100%",
     padding: "24px",
     margin: "16px 0",
@@ -41,4 +42,8 @@ export const useStyles = createStyles(() => ({
   place: {
     lineHeight: "19px",
   },
+  star: {
+    fill:"#5E96FC",
+    stroke:"#ACADB9"
+  }
 }));
