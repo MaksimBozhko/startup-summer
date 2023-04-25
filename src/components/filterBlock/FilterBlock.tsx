@@ -7,6 +7,7 @@ import { useStyles } from "./styles"
 import { ReactComponent as Close } from "../../common/assets/img/close.svg"
 import { getSearchParams } from "../../common/utils/getSearchParams"
 import { useGetCataloguesQuery } from "./createAPI"
+import { OptionsType } from "./types"
 
 export const FilterBlock = () => {
   const { classes } = useStyles()
@@ -14,10 +15,13 @@ export const FilterBlock = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
 
-  const { data } = useGetCataloguesQuery({})
-  console.log(data)
+  const [value, setValue] = useState(search.industry ? search.industry.split(",") : [])
+
+  const { data, isSuccess } = useGetCataloguesQuery()
+  const multiSelectOptions = isSuccess && data.map((el: OptionsType) => el.title_rus)
 
   const handleChange = (selected: string[]) => {
+    setValue(selected)
     if (selected.length) {
       setSearchParams({ ...search, industry: selected.join(",") })
     } else {
@@ -54,12 +58,12 @@ export const FilterBlock = () => {
       <div>
         <p className={classes.text}>Отрасль</p>
         <MultiSelect
-          data={["React", "Angular", "Svelte", "Vue", "Riot", "Next.js", "Blitz.js"]}
+          data={multiSelectOptions || []}
           placeholder="Выберете отрасль"
           rightSection={<IconChevronDown size="1rem" />}
           styles={{ rightSection: { pointerEvents: "none" } }}
           rightSectionWidth={40}
-          value={search?.industry ? search.industry.split(",") : []}
+          value={value}
           onChange={handleChange}
         />
       </div>
