@@ -8,6 +8,7 @@ import { useActions, useDebounce } from "../../hooks"
 import { ItemType } from "../../store/slices/vacancy/types"
 import { Pagination } from "../../components/pagination"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
+import { MESSAGES } from "./constant"
 
 export const VacancyList = () => {
   const selectPage = useSelector((state: any) => state.vacancy.selectPage)
@@ -25,14 +26,17 @@ export const VacancyList = () => {
 
   return (
     <div>
-      {vacancyList.map((el: ItemType) => <Item key={el.id}
-                                               profession={el.profession}
-                                               type_of_work={el.type_of_work.title}
-                                               payment_to={el.payment_to}
-                                               payment_from={el.payment_from}
-                                               currency={el.currency}
-                                               town={el.town.title}
-      />)}
+      {
+        vacancyList
+          ? vacancyList.map((el: ItemType) => <Item key={el.id}
+                                                    profession={el.profession}
+                                                    type_of_work={el.type_of_work.title}
+                                                    payment_to={el.payment_to}
+                                                    payment_from={el.payment_from}
+                                                    currency={el.currency}
+                                                    town={el.town.title} />)
+          : <p>{MESSAGES.NO_VACANCIES}</p>
+      }
       <Pagination totalUserCount={totalCount} currentPage={selectPage} />
     </div>
   )

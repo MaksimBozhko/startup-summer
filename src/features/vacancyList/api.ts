@@ -3,7 +3,7 @@ import { instance } from "../../api/api"
 
 export const vacancyAPI = {
   vacancy(data: RequestVacanciesType) {
-    return instance.get<ResponseVacanciesType>("vacancies123/", {
+    return instance.get<ResponseVacanciesType>("vacancies/", {
       params: {
         published: 1,
         ...data
