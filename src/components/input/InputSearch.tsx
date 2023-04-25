@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import { IconSearch } from "@tabler/icons-react"
 import { Input } from "@mantine/core"
+
 import { useStyles } from "./styles"
-import { useSearchParams } from "react-router-dom"
 import { getSearchParams } from "../../common/utils/getSearchParams"
 
 export const InputSearch = () => {
@@ -10,11 +11,11 @@ export const InputSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
 
-  const [value, setValue] = useState(search.packName)
+  const [value, setValue] = useState(search.keyword)
   const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value)
     if (e.currentTarget.value) {
-      setSearchParams({ ...search, packName: e.currentTarget.value })
+      setSearchParams({ ...search, keyword: e.currentTarget.value })
     } else {
       setSearchParams({})
     }

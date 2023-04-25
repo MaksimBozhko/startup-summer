@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core"
 
-export const useStyles = createStyles((theme) => ({
+export const useStyles = createStyles(() => ({
   paper: {
     maxWidth: "773px",
     width: "100%",
@@ -17,13 +17,11 @@ export const useStyles = createStyles((theme) => ({
     color: "var(--secondaryColor)"
   },
   content: {
-    maxWidth: "340px",
     display: "flex",
     flexDirection: "column",
     alignItems: "space-between",
   },
   info: {
-
     margin: "12px 0"
   },
   salary: {
