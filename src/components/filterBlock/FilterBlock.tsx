@@ -6,26 +6,18 @@ import { useSearchParams } from "react-router-dom"
 import { useStyles } from "./styles"
 import { ReactComponent as Close } from "../../common/assets/img/close.svg"
 import { getSearchParams } from "../../common/utils/getSearchParams"
+import { useGetCataloguesQuery } from "./createAPI"
 
 export const FilterBlock = () => {
   const { classes } = useStyles()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
-  const [value, setValue] = useState(search?.industry ? search.industry.split(",") : [])
 
-  const data = [
-    { value: "react", label: "React" },
-    { value: "ng", label: "Angular" },
-    { value: "svelte", label: "Svelte" },
-    { value: "vue", label: "Vue" },
-    { value: "riot", label: "Riot" },
-    { value: "next", label: "Next.js" },
-    { value: "blitz", label: "Blitz.js" }
-  ]
+  const { data } = useGetCataloguesQuery({})
+  console.log(data)
 
   const handleChange = (selected: string[]) => {
-    // setValue([...selected])
     if (selected.length) {
       setSearchParams({ ...search, industry: selected.join(",") })
     } else {
