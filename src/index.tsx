@@ -1,14 +1,21 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import { Provider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
+
 import "./index.scss"
 import App from "./app"
-import { BrowserRouter } from "react-router-dom"
+import { setupStore } from "./store"
+
+const store = setupStore()
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 )
 root.render(
   <BrowserRouter basename={"/startup-summer"}>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 )

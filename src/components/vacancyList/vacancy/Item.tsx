@@ -5,7 +5,7 @@ import { useStyles } from "./styles"
 import { ReactComponent as IconPlace } from "../../../common/assets/img/place.svg"
 import { ReactComponent as IconStar } from "../../../common/assets/img/star.svg"
 
-export const Vacancy = () => {
+export const Item = () => {
   const { classes } = useStyles()
   return (
     <Paper className={classes.paper}>
@@ -17,12 +17,12 @@ export const Vacancy = () => {
             <span className={classes.schedule}>Полный рабочий день</span>
           </div>
           <div className={classes.placeBlock}>
-            <IconPlace />
+            <IconPlace/>
             <p className={classes.place}>Новый Уренгой</p>
           </div>
         </div>
       </div>
-      <IconStar />
+      <IconStar className={classes.star}  />
     </Paper>
   )
 }

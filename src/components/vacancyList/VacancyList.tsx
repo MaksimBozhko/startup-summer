@@ -1,11 +1,11 @@
 import React from "react"
 
-import { Vacancy } from "./vacancy"
+import { Item } from "./vacancy"
 
 export const VacancyList = () => {
   return (
     <>
-      <Vacancy />
+      <Item />
     </>
   )
 }
