@@ -1,9 +1,9 @@
 import React from "react"
 
 import s from "./styles.module.scss"
-import { FilterBlock } from "../../components/filterBlock"
+import { FilterBlock } from "../../features/filterBlock"
 import { InputSearch } from "../../components/input"
-import { VacancyList } from "../../components/vacancyList"
+import { VacancyList } from "../../features/vacancyList"
 
 export const Search = () => {
   return (

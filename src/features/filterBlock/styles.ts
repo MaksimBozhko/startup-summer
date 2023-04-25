@@ -19,6 +19,9 @@ export const useStyles = createStyles(() => ({
     fontSize: "20px",
     lineHeight: "20px",
   },
+  reset: {
+    cursor: "pointer"
+  },
   close: {
     fontWeight: 500,
     fontSize: "14px",

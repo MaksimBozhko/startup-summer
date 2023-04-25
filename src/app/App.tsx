@@ -14,9 +14,9 @@ function App() {
       <Header />
       <div className="root">
         <Routes>
-          <Route path={ROUTES.SEARCH_PAGE} element={<Search/>} />
-          <Route path={ROUTES.VACANCY_PAGE} element={<Vacancy/>} />
-          <Route path={ROUTES.LOGIN} element={<Login/>} />
+          <Route path={ROUTES.SEARCH_PAGE} element={<Search />} />
+          <Route path={ROUTES.VACANCY_PAGE} element={<Vacancy />} />
+          <Route path={ROUTES.LOGIN} element={<Login />} />
           <Route path={ROUTES.SELECTED_PAGE} element={<h1></h1>} />
           <Route path={ROUTES.UNREGISTERED_PAGE} element={<h1></h1>} />
         </Routes>

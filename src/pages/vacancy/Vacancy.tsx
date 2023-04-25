@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Item } from "../../components/vacancyList/vacancy"
+import { Item } from "../../features/vacancyList/vacancy"
 
 export const Vacancy = () => {
   return (

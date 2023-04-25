@@ -8,6 +8,7 @@ import { getSearchParams } from "../../common/utils/getSearchParams"
 
 export const InputSearch = () => {
   const { classes } = useStyles()
+
   const [searchParams, setSearchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
 
@@ -21,13 +22,11 @@ export const InputSearch = () => {
     }
   }
 
-  return (
-    <Input
-      className={classes.input}
-      icon={<IconSearch />}
-      placeholder="Введите название вакансии"
-      onChange={onChangeInputHandler}
-      value={value}
-    />
-  )
+  return <Input
+    className={classes.input}
+    icon={<IconSearch />}
+    placeholder="Введите название вакансии"
+    onChange={onChangeInputHandler}
+    value={value}
+  />
 }

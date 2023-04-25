@@ -20,4 +20,6 @@ export type RequestVacanciesType = Partial<{
   payment_from: number
   payment_to: number
   catalogues: number
+  count: number
+  page: number
 }>
