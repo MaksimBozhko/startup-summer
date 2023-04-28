@@ -24,7 +24,7 @@ export const Item: FC<ItemPropsType> = (
     currency,
     town
   }) => {
-  const { classes } = useStyles()
+  const { classes } = useStyles({})
   let salaryBlock
   if (payment_from === 0 && payment_to !== 0) {
     salaryBlock = <>з/п {payment_to} {currency}</>

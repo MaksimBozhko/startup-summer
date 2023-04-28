@@ -1,6 +1,7 @@
 import { createStyles } from "@mantine/core"
+import { stylesPropsType } from "./types"
 
-export const useStyles = createStyles(() => ({
+export const useStyles = createStyles((theme, { color }: stylesPropsType) => ({
   paper: {
     maxWidth: "773px",
     width: "100%",
