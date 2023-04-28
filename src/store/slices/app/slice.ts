@@ -40,6 +40,14 @@ const slice = createSlice({
     )
     builder.addMatcher(
       (action) => {
+        return action.type.endsWith("/fulfilled")
+      },
+      (state) => {
+        state.status = "succeeded"
+      }
+    )
+    builder.addMatcher(
+      (action) => {
         return action.type.endsWith("/rejected")
       },
       (state, action) => {

@@ -9,20 +9,20 @@ import { ItemType } from "../../store/slices/vacancy/types"
 import { Pagination } from "../../components/pagination"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { MESSAGES } from "./constant"
-import { getSelectPage, getTotalCount, getVacancy } from "../../store/slices/vacancy"
+import { getSelectPage, getTotalCount, getVacancies } from "../../store/slices/vacancy"
 
 export const VacancyList = () => {
   const selectPage = useSelector(getSelectPage)
-  const vacancyList = useSelector(getVacancy)
+  const vacancyList = useSelector(getVacancies)
   const totalCount = useSelector(getTotalCount)
-  const { vacancy } = useActions(vacancyThunks)
+  const { vacancies } = useActions(vacancyThunks)
 
   const [searchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
 
   useEffect(() => {
-    vacancy({ keyword: search.keyword, count: 4, page: selectPage })
-  }, [vacancy, selectPage])
+    vacancies({ keyword: search.keyword, count: 4, page: selectPage })
+  }, [vacancies, selectPage])
 
   return (
     <div>
@@ -31,12 +31,14 @@ export const VacancyList = () => {
           ? <div>
             {
               vacancyList.map((el: ItemType) => <Item key={el.id}
+                                                      id={el.id}
                                                       profession={el.profession}
                                                       type_of_work={el.type_of_work.title}
                                                       payment_to={el.payment_to}
                                                       payment_from={el.payment_from}
                                                       currency={el.currency}
-                                                      town={el.town.title} />)
+                                                      town={el.town.title}
+                                                      titleColor={"var(--secondaryColor)"} />)
             }
             <Pagination totalUserCount={totalCount} currentPage={selectPage} />
           </div>

@@ -16,7 +16,7 @@ import { getCatalogues } from "../../store/slices/filter"
 export const FilterBlock = () => {
   const { classes } = useStyles()
 
-  const { vacancy } = useActions(vacancyThunks)
+  const { vacancies } = useActions(vacancyThunks)
   const { catalogues } = useActions(cataloguesThunks)
   const cataloguesList = useSelector(getCatalogues)
 
@@ -62,7 +62,7 @@ export const FilterBlock = () => {
       const selectedOption: any = multiSelectOptions.find((option: any) => option.title_rus === optionTitle)
       return selectedOption?.key
     })
-    vacancy({ catalogues, payment_from: search.payment_from, payment_to: search.payment_to })
+    vacancies({ catalogues, payment_from: search.payment_from, payment_to: search.payment_to })
   }
 
   return (

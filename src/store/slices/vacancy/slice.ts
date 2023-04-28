@@ -2,12 +2,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { ItemType, RequestVacanciesType, ResponseVacanciesType } from "./types"
 import { createAppAsyncThunk } from "../../../common/utils/create-app-async-thunk"
-import { vacancyAPI } from "../../../features/vacancyList/api"
+import { vacanciesAPI } from "../../../features/vacancyList/api"
 
-const vacancy = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesType>
-("vacancy", async (arg, { rejectWithValue }) => {
+const vacancies = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesType>
+("vacancies", async (arg, { rejectWithValue }) => {
   try {
-    const res = await vacancyAPI.vacancy(arg)
+    const res = await vacanciesAPI.vacancies(arg)
+    return res.data
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
+
+const vacancy = createAppAsyncThunk<any, string>
+("vacancy", async (id, { rejectWithValue }) => {
+  try {
+    const res = await vacanciesAPI.vacancy(id)
     return res.data
   } catch (e) {
     return rejectWithValue(e)
@@ -17,9 +27,10 @@ const vacancy = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesType>
 const slice = createSlice({
   name: "vacancy",
   initialState: {
-    vacancy: [] as ItemType[],
+    vacancies: [] as ItemType[],
+    vacancy: {} as ItemType,
     selectPage: 1,
-    totalCount: 1
+    totalCount: 1,
   },
   reducers: {
     setSelectPage: (state, action: PayloadAction<number>) => {
@@ -28,16 +39,19 @@ const slice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(vacancy.fulfilled, (state, action) => {
-        state.vacancy = action.payload.objects
+      .addCase(vacancies.fulfilled, (state, action) => {
+        state.vacancies = action.payload.objects
         state.totalCount = action.payload.total
+      })
+      .addCase(vacancy.fulfilled, (state, action) => {
+        state.vacancy = action.payload
       })
   }
 })
 
 export const vacancyReducer = slice.reducer
 export const vacancyActions = slice.actions
-export const vacancyThunks = { vacancy }
+export const vacancyThunks = { vacancies, vacancy }
 
 
 

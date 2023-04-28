@@ -1,11 +1,13 @@
 import React, { FC } from "react"
 import { Paper } from "@mantine/core"
+import { NavLink } from "react-router-dom"
 
 import { useStyles } from "./styles"
 import { ReactComponent as IconPlace } from "../../../common/assets/img/place.svg"
 import { ReactComponent as IconStar } from "../../../common/assets/img/star.svg"
 
 type ItemPropsType = {
+  id?: number
   profession?: string
   firm_name?: string
   type_of_work?: string
@@ -13,18 +15,21 @@ type ItemPropsType = {
   payment_from?: number
   currency?: string
   town?: string
+  titleColor: any
 }
 
 export const Item: FC<ItemPropsType> = (
   {
+    id,
     profession,
     type_of_work,
     payment_to,
     payment_from,
     currency,
-    town
+    town,
+    titleColor
   }) => {
-  const { classes } = useStyles({})
+  const { classes } = useStyles({titleColor})
   let salaryBlock
   if (payment_from === 0 && payment_to !== 0) {
     salaryBlock = <>з/п {payment_to} {currency}</>
@@ -39,7 +44,9 @@ export const Item: FC<ItemPropsType> = (
   return (
     <Paper className={classes.paper}>
       <div>
-        <h2 className={classes.title}>{profession}</h2>
+        <h2>
+          <NavLink to={`/vacancy/${id}`} className={classes.title}>{profession}</NavLink>
+        </h2>
         <div className={classes.content}>
           <div className={classes.info}>
             <span className={classes.salary}>{salaryBlock}</span>

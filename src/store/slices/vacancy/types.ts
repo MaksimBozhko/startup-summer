@@ -13,6 +13,8 @@ export type ItemType = {
   payment_to: number
   payment_from: number
   currency: string
+  firm_activity: string
+  vacancyRichText: string
 }
 
 export type RequestVacanciesType = Partial<{

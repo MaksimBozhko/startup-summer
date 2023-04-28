@@ -6,7 +6,7 @@ import { appSlice } from "./slices/app/slice"
 
 const rootReducer = combineReducers({
   app: appSlice,
-  vacancy: vacancyReducer,
+  vacancies: vacancyReducer,
   catalogues: cataloguesReducer
 })
 

@@ -14,7 +14,7 @@ export const InputSearch = () => {
 
   const [searchParams, setSearchParams] = useSearchParams()
   const search = getSearchParams(searchParams)
-  const { vacancy } = useActions(vacancyThunks)
+  const { vacancies } = useActions(vacancyThunks)
 
   const [value, setValue] = useState(search.keyword)
   const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export const InputSearch = () => {
     }
   }
   const onClickHandler = () => {
-    vacancy({keyword: search.keyword})
+    vacancies({keyword: search.keyword})
   }
 
   return <>
