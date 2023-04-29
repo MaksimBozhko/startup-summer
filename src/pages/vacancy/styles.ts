@@ -11,6 +11,7 @@ export const useStyles = createStyles((theme, { color }: stylesPropsType) => ({
   content: {
     padding: "24px",
     maxWidth: "773px",
+    width: "100%",
     marginBottom: "50px"
   }
 }));
