@@ -6,10 +6,9 @@ export type ResponseVacanciesType = {
 export type ItemType = {
   id: number
   profession: string
-  firm_name: string
-  town: { title: string }
+  town: string
   catalogues: { title: string }[]
-  type_of_work: { title: string }
+  type_of_work: string
   payment_to: number
   payment_from: number
   currency: string
@@ -25,3 +24,16 @@ export type RequestVacanciesType = Partial<{
   count: number
   page: number
 }>
+
+export type ResponseVacancyType = {
+  id: number
+  profession: string
+  town: {title: string}
+  catalogues: { title: string }[]
+  type_of_work: {title: string}
+  payment_to: number
+  payment_from: number
+  currency: string
+  firm_activity: string
+  vacancyRichText: string
+}

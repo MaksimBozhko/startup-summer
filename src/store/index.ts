@@ -1,1 +1,1 @@
-export { setupStore } from "./store"
+export { store } from "./store"

@@ -1,4 +1,4 @@
-import { RequestVacanciesType, ResponseVacanciesType } from "../../store/slices/vacancy/types"
+import { RequestVacanciesType, ResponseVacanciesType, ResponseVacancyType } from "../../store/slices/vacancy/types"
 import { instance } from "../../api/api"
 
 export const vacanciesAPI = {
@@ -11,6 +11,6 @@ export const vacanciesAPI = {
     })
   },
   vacancy(id: string) {
-    return instance.get<ResponseVacanciesType>(`vacancies/${id}`)
+    return instance.get<ResponseVacancyType>(`vacancies/${id}`)
   }
 }

@@ -25,18 +25,12 @@ export const Vacancy = () => {
 
   useEffect(() => {
     vacancy(id)
-  }, [vacancy])
+  }, [vacancy, id])
 
   if (status !== "succeeded") return <>Loading...</>
   return (
     <div className={classes.page}>
-      <Item id={vacancyItem.id}
-            profession={vacancyItem.profession}
-            type_of_work={vacancyItem.type_of_work.title}
-            payment_to={vacancyItem.payment_to}
-            payment_from={vacancyItem.payment_from}
-            currency={vacancyItem.currency}
-            town={vacancyItem.town.title}
+      <Item vacancy={vacancyItem}
             titleColor={"var(--primaryColor)"}/>
       <Paper className={classes.content}>
         <div dangerouslySetInnerHTML={{ __html: text }} />

@@ -1,0 +1,1 @@
+export { getSelectedVacancies } from "./selectors"

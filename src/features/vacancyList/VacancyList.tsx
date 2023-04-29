@@ -31,13 +31,7 @@ export const VacancyList = () => {
           ? <div>
             {
               vacancyList.map((el: ItemType) => <Item key={el.id}
-                                                      id={el.id}
-                                                      profession={el.profession}
-                                                      type_of_work={el.type_of_work.title}
-                                                      payment_to={el.payment_to}
-                                                      payment_from={el.payment_from}
-                                                      currency={el.currency}
-                                                      town={el.town.title}
+                                                      vacancy={el}
                                                       titleColor={"var(--secondaryColor)"} />)
             }
             <Pagination totalUserCount={totalCount} currentPage={selectPage} />

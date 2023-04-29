@@ -5,9 +5,7 @@ import { BrowserRouter } from "react-router-dom"
 
 import "./index.scss"
 import App from "./app"
-import { setupStore } from "./store"
-
-const store = setupStore()
+import { store } from "./store"
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

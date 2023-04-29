@@ -5,31 +5,30 @@ import { NavLink } from "react-router-dom"
 import { useStyles } from "./styles"
 import { ReactComponent as IconPlace } from "../../../common/assets/img/place.svg"
 import { ReactComponent as IconStar } from "../../../common/assets/img/star.svg"
+import { useActions } from "../../../hooks"
+import { selectedVacancyActions } from "../../../store/slices/selected/slice"
+import { ItemType } from "../../../store/slices/vacancy/types"
 
 type ItemPropsType = {
-  id?: number
-  profession?: string
-  firm_name?: string
-  type_of_work?: string
-  payment_to?: number
-  payment_from?: number
-  currency?: string
-  town?: string
-  titleColor: any
+  vacancy: ItemType,
+  titleColor: string
 }
 
-export const Item: FC<ItemPropsType> = (
-  {
+export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
+
+  const { classes } = useStyles({titleColor})
+  const { setVacancy } = useActions(selectedVacancyActions)
+
+  const {
     id,
     profession,
-    type_of_work,
-    payment_to,
     payment_from,
+    payment_to,
     currency,
     town,
-    titleColor
-  }) => {
-  const { classes } = useStyles({titleColor})
+    type_of_work
+  } = vacancy
+
   let salaryBlock
   if (payment_from === 0 && payment_to !== 0) {
     salaryBlock = <>з/п {payment_to} {currency}</>
@@ -39,6 +38,10 @@ export const Item: FC<ItemPropsType> = (
     salaryBlock = <>з/п {payment_from} - {payment_to} {currency}</>
   } else {
     salaryBlock = <></>
+  }
+
+  const clickStarHandler = () => {
+    setVacancy(vacancy)
   }
 
   return (
@@ -58,7 +61,7 @@ export const Item: FC<ItemPropsType> = (
           </div>
         </div>
       </div>
-      <IconStar className={classes.star} />
+      <IconStar className={classes.star} onClick={clickStarHandler} />
     </Paper>
   )
 }
