@@ -14,6 +14,7 @@ export type ItemType = {
   currency: string
   firm_activity: string
   vacancyRichText: string
+  isSelected: boolean
 }
 
 export type RequestVacanciesType = Partial<{

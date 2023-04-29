@@ -1,7 +1,7 @@
 import { createStyles } from "@mantine/core"
 import { stylesPropsType } from "./types"
 
-export const useStyles = createStyles((theme, { titleColor }: stylesPropsType) => ({
+export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesPropsType) => ({
   paper: {
     maxWidth: "773px",
     width: "100%",
@@ -42,7 +42,7 @@ export const useStyles = createStyles((theme, { titleColor }: stylesPropsType) =
     lineHeight: "19px",
   },
   star: {
-    fill:"#5E96FC",
-    stroke:"#ACADB9"
+    fill: colorIcon ? "#5E96FC" : "#FFFFFF",
+    stroke: colorIcon ?  "#5E96FC": "#ACADB9"
   }
 }));

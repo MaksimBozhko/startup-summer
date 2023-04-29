@@ -1,7 +1,7 @@
 import { createStyles } from "@mantine/core"
 import { stylesPropsType } from "../../features/vacancyList/vacancy/types"
 
-export const useStyles = createStyles((theme, { color }: stylesPropsType) => ({
+export const useStyles = createStyles((theme, {  }: stylesPropsType) => ({
   page: {
     display: "flex",
     alignItems: "center",

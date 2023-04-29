@@ -16,9 +16,6 @@ type ItemPropsType = {
 
 export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
 
-  const { classes } = useStyles({titleColor})
-  const { setVacancy } = useActions(selectedVacancyActions)
-
   const {
     id,
     profession,
@@ -26,22 +23,28 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
     payment_to,
     currency,
     town,
-    type_of_work
+    type_of_work,
+    isSelected
   } = vacancy
 
-  let salaryBlock
-  if (payment_from === 0 && payment_to !== 0) {
-    salaryBlock = <>з/п {payment_to} {currency}</>
-  } else if (payment_from !== 0 && payment_to === 0) {
-    salaryBlock = <>з/п {payment_from} {currency}</>
-  } else if (payment_from !== 0 && payment_to !== 0) {
-    salaryBlock = <>з/п {payment_from} - {payment_to} {currency}</>
-  } else {
-    salaryBlock = <></>
+  const { classes } = useStyles({titleColor, colorIcon: isSelected})
+  const { setVacancy } = useActions(selectedVacancyActions)
+
+  const getSalary = () => {
+    if (payment_from === 0 && payment_to !== 0) {
+      return <>з/п {payment_to} {currency}</>
+    } else if (payment_from !== 0 && payment_to === 0) {
+      return <>з/п {payment_from} {currency}</>
+    } else if (payment_from !== 0 && payment_to !== 0) {
+      return <>з/п {payment_from} - {payment_to} {currency}</>
+    } else {
+      return <></>
+    }
   }
+  const salaryBlock = getSalary()
 
   const clickStarHandler = () => {
-    setVacancy(vacancy)
+    setVacancy({ vacancy, isSelected })
   }
 
   return (

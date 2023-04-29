@@ -5,22 +5,27 @@ import { createAppAsyncThunk } from "../../../common/utils/create-app-async-thun
 import { vacanciesAPI } from "../../../features/vacancyList/api"
 
 const vacancies = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesType>
-("vacancies", async (arg, { rejectWithValue }) => {
+("vacancies", async (arg, { rejectWithValue, getState }) => {
+  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id);
   try {
     const res = await vacanciesAPI.vacancies(arg)
     return {
-      objects: res.data.objects.map((item: any) => ({
-        id: item.id,
-        profession: item.profession,
-        town: item.town.title,
-        catalogues: item.catalogues,
-        type_of_work: item.type_of_work.title,
-        payment_to: item.payment_to,
-        payment_from: item.payment_from,
-        currency: item.currency,
-        firm_activity: item.firm_activity,
-        vacancyRichText: item.vacancyRichText
-      })),
+      objects: res.data.objects.map((item: any) => {
+        const isSelected = selectedVacancyIds.includes(item.id)
+        return {
+          id: item.id,
+          profession: item.profession,
+          town: item.town.title,
+          catalogues: item.catalogues,
+          type_of_work: item.type_of_work.title,
+          payment_to: item.payment_to,
+          payment_from: item.payment_from,
+          currency: item.currency,
+          firm_activity: item.firm_activity,
+          vacancyRichText: item.vacancyRichText,
+          isSelected: isSelected
+        }
+      }),
       total: res.data.total
     }
   } catch (e) {
@@ -29,9 +34,11 @@ const vacancies = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesTyp
 })
 
 const vacancy = createAppAsyncThunk<any, string>
-("vacancy", async (id, { rejectWithValue }) => {
+("vacancy", async (id, { rejectWithValue , getState}) => {
+  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id);
   try {
     const res = await vacanciesAPI.vacancy(id)
+    const isSelected = selectedVacancyIds.includes(res.data.id)
     return {
       id: res.data.id,
       profession: res.data.profession,
@@ -42,7 +49,8 @@ const vacancy = createAppAsyncThunk<any, string>
       payment_from: res.data.payment_from,
       currency: res.data.currency,
       firm_activity: res.data.firm_activity,
-      vacancyRichText: res.data.vacancyRichText
+      vacancyRichText: res.data.vacancyRichText,
+      isSelected: isSelected
     }
   } catch (e) {
     return rejectWithValue(e)
