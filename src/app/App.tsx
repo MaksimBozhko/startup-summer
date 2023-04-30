@@ -7,8 +7,9 @@ import { ROUTES } from "../constant"
 import { Search } from "../pages/search"
 import { Vacancy } from "../pages/vacancy"
 import { Selected } from "../pages/selected"
+import { NotFound } from "../pages/notFound"
 
-function App() {
+export function App() {
   return (
     <div className="main">
       <Header />
@@ -16,12 +17,10 @@ function App() {
         <Routes>
           <Route path={ROUTES.SEARCH_PAGE} element={<Search />} />
           <Route path={ROUTES.VACANCY_PAGE} element={<Vacancy />} />
-          <Route path={ROUTES.SELECTED_PAGE} element={<Selected/>} />
-          <Route path={ROUTES.UNREGISTERED_PAGE} element={<h1></h1>} />
+          <Route path={ROUTES.SELECTED_PAGE} element={<Selected />} />
+          <Route path={ROUTES.NOT_FOUND_PAGE} element={<NotFound />} />
         </Routes>
       </div>
     </div>
   )
 }
-
-export default App
