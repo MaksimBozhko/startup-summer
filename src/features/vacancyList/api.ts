@@ -6,6 +6,7 @@ export const vacanciesAPI = {
     return instance.get<ResponseVacanciesType>("vacancies/", {
       params: {
         published: 1,
+        count: 4,
         ...data
       }
     })

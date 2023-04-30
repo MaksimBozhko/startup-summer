@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Button, Flex, MultiSelect, Paper, Select } from "@mantine/core"
+import { Button, Flex, MultiSelect, NumberInput, Paper } from "@mantine/core"
 import { IconChevronDown } from "@tabler/icons-react"
 import { useSearchParams } from "react-router-dom"
 
@@ -39,15 +39,16 @@ export const FilterBlock = () => {
       setSearchParams({})
     }
   }
-  const paymentFromChange = (value: string) => {
-    if (value !== "0") {
+  const paymentFromChange = (value: number | "") => {
+    console.log(typeof value)
+    if (value !== "") {
       setSearchParams({ ...search, payment_from: value })
     } else {
       setSearchParams({})
     }
   }
-  const paymentToChange = (value: string) => {
-    if (value !== "0") {
+  const paymentToChange = (value: number | "") => {
+    if (value !== "") {
       setSearchParams({ ...search, payment_to: value })
     } else {
       setSearchParams({})
@@ -56,9 +57,10 @@ export const FilterBlock = () => {
   const resetFilterHandler = () => {
     setValue([""])
     setSearchParams({})
+    vacancies({})
   }
-  const clickHandler = () => {
-    const catalogues = search.industry.split("-").map((optionTitle: string) => {
+  const applyHandler = () => {
+    const catalogues = search.industry?.split("-").map((optionTitle: string) => {
       const selectedOption: any = multiSelectOptions.find((option: any) => option.title_rus === optionTitle)
       return selectedOption?.key
     })
@@ -93,25 +95,18 @@ export const FilterBlock = () => {
       </div>
       <div>
         <p className={classes.text}>Оклад</p>
-        <Select
+        <NumberInput
           placeholder="От"
-          searchable
-          nothingFound="No options"
-          className={classes.select}
-          data={["0", "10000", "20000", "30000", "40000", "50000", "60000", "7000", "8000", "9000"]}
-          value={search.payment_from ? search.payment_from : ""}
+          value={search.payment_from ? +search.payment_from : ""}
           onChange={paymentFromChange}
         />
-        <Select
+        <NumberInput
           placeholder="До"
-          searchable
-          nothingFound="No options"
-          data={["0", "10000", "20000", "30000", "40000", "50000", "60000", "7000", "8000", "9000"]}
-          value={search.payment_to ? search.payment_to : ""}
+          value={search.payment_to ? +search.payment_to : ""}
           onChange={paymentToChange}
         />
       </div>
-      <Button className={classes.btn} onClick={clickHandler}>Применить</Button>
+      <Button className={classes.btn} onClick={applyHandler}>Применить</Button>
     </Paper>
   )
 }

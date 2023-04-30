@@ -40,10 +40,24 @@ export const useStyles = createStyles(() => ({
   btn: {
     width: "100%",
     color: "#FFFFFF",
+    background: "var(--secondaryColor)",
     fontWeight: 500,
     fontSize: "14px",
     lineHeight: "21px",
     borderRadius: "8px",
     marginTop: "20px"
-  }
+  },
+  ["mantine-x0i9fi"]: {
+    color: "red",
+    width: "100%",
+    background: "var(--secondaryColor)",
+    fontWeight: 500,
+    fontSize: "14px",
+    lineHeight: "21px",
+    borderRadius: "8px",
+    marginTop: "20px",
+    borderTop: "none",
+    borderLeft: "none",
+    borderRight: "none"
+}
 }));
