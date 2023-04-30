@@ -8,7 +8,7 @@ import { useActions } from "../../hooks"
 import { ItemType } from "../../store/slices/vacancy/types"
 import { Pagination } from "../../components/pagination"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
-import { MESSAGES } from "./constant"
+import { MESSAGES } from "../../common/constant/constant"
 import { getSelectPage, getTotalCount, getVacancies } from "../../store/slices/vacancy"
 
 export const VacancyList = () => {
