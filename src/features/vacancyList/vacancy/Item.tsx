@@ -3,11 +3,12 @@ import { Paper } from "@mantine/core"
 import { NavLink } from "react-router-dom"
 
 import { useStyles } from "./styles"
+import { useActions } from "../../../hooks"
 import { ReactComponent as IconPlace } from "../../../common/assets/img/place.svg"
 import { ReactComponent as IconStar } from "../../../common/assets/img/star.svg"
-import { useActions } from "../../../hooks"
 import { selectedVacancyActions } from "../../../store/slices/selected/slice"
 import { ItemType } from "../../../store/slices/vacancy/types"
+import { vacancyActions } from "../../../store/slices/vacancy/slice"
 
 type ItemPropsType = {
   vacancy: ItemType,
@@ -27,8 +28,9 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
     isSelected
   } = vacancy
 
-  const { classes } = useStyles({titleColor, colorIcon: isSelected})
+  const { classes } = useStyles({ titleColor, colorIcon: isSelected })
   const { setVacancy } = useActions(selectedVacancyActions)
+  const { updateVacancy } = useActions(vacancyActions)
 
   const getSalary = () => {
     if (payment_from === 0 && payment_to !== 0) {
@@ -45,6 +47,7 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
 
   const clickStarHandler = () => {
     setVacancy({ vacancy, isSelected })
+    updateVacancy(vacancy.id)
   }
 
   return (

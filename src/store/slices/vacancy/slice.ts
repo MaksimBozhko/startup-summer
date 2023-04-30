@@ -6,7 +6,7 @@ import { vacanciesAPI } from "../../../features/vacancyList/api"
 
 const vacancies = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesType>
 ("vacancies", async (arg, { rejectWithValue, getState }) => {
-  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id);
+  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id)
   try {
     const res = await vacanciesAPI.vacancies(arg)
     return {
@@ -34,8 +34,8 @@ const vacancies = createAppAsyncThunk<ResponseVacanciesType, RequestVacanciesTyp
 })
 
 const vacancy = createAppAsyncThunk<any, string>
-("vacancy", async (id, { rejectWithValue , getState}) => {
-  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id);
+("vacancy", async (id, { rejectWithValue, getState }) => {
+  const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id)
   try {
     const res = await vacanciesAPI.vacancy(id)
     const isSelected = selectedVacancyIds.includes(res.data.id)
@@ -68,12 +68,20 @@ const slice = createSlice({
   reducers: {
     setSelectPage: (state, action: PayloadAction<number>) => {
       state.selectPage = action.payload
+    },
+    updateVacancy: (state, action: PayloadAction<number>) => {
+      const vacancy = state.vacancies.find((el) => el.id === action.payload)
+      if (vacancy) {
+        vacancy.isSelected = !vacancy.isSelected
+      }
+      if (state.vacancy.id === action.payload) {
+        state.vacancy.isSelected = !state.vacancy.isSelected
+      }
     }
   },
   extraReducers: builder => {
     builder
       .addCase(vacancies.fulfilled, (state, action) => {
-        console.log(action.payload.objects)
         state.vacancies = action.payload.objects
         state.totalCount = action.payload.total
       })

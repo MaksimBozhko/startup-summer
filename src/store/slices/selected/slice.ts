@@ -7,9 +7,16 @@ const slice = createSlice({
   initialState: [] as ItemType[],
   reducers: {
     setVacancy: (state, action: PayloadAction<{ vacancy: ItemType, isSelected: boolean }>) => {
-      action.payload.isSelected
-        ? state.filter((el) => el.id !== action.payload.vacancy.id)
-        : state.push(action.payload.vacancy)
+      const vacancyIndex = state.findIndex((el) => el.id === action.payload.vacancy.id)
+      if (action.payload.isSelected && vacancyIndex >= 0) {
+        state.splice(vacancyIndex, 1)
+      } else if (!action.payload.isSelected && vacancyIndex < 0) {
+        state.push({ ...action.payload.vacancy, isSelected: true })
+      }
+      const vacancy = state.find((el) => el.id === action.payload.vacancy.id)
+      if (vacancy) {
+        vacancy.isSelected = !action.payload.isSelected
+      }
     }
   }
 })
