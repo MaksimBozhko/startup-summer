@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { Paper } from "@mantine/core"
+import { Box, Paper } from "@mantine/core"
 
 import { Item } from "../../features/vacancyList/vacancy"
 import { getVacancy } from "../../store/slices/vacancy/selectors"
@@ -10,6 +10,7 @@ import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { getStatus } from "../../store/slices/app"
 import { useStyles } from "./styles"
 import { getContentText } from "../../common/utils/getContentText"
+import { Preloader } from "../../components/preloader/Preloader"
 
 export const Vacancy = () => {
   const { classes } = useStyles({})
@@ -27,14 +28,14 @@ export const Vacancy = () => {
     vacancy(id)
   }, [vacancy, id])
 
-  if (status !== "succeeded") return <>Loading...</>
+  if (status === "loading") return <Preloader />
   return (
-    <div className={classes.page}>
+    <Box className={classes.page}>
       <Item vacancy={vacancyItem}
-            titleColor={"var(--primaryColor)"}/>
+            titleColor={"var(--primaryColor)"} />
       <Paper className={classes.content}>
-        <div dangerouslySetInnerHTML={{ __html: text }} />
+        <Box dangerouslySetInnerHTML={{ __html: text }} />
       </Paper>
-    </div>
+    </Box>
   )
 }

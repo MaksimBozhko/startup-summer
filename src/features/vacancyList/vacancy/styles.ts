@@ -13,9 +13,6 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
     gap: "30px",
   },
   title: {
-    fontWeight: 600,
-    fontSize: "20px",
-    lineHeight: "24px",
     color: titleColor
   },
   content: {
@@ -27,13 +24,37 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
     margin: "12px 0"
   },
   salary: {
+    display: "inline-block",
     fontWeight: 600,
     fontSize: "16px",
     lineHeight: "20px",
   },
   schedule: {
+    display: "inline-block",
     lineHeight: "20px",
+    position: "relative",
+    marginLeft: "24px",
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      width: "4px",
+      height: "4px",
+      borderRadius: "50%",
+      backgroundColor: "#ACADB9",
+      top: "50%",
+      left: "-12px",
+      transform: "translateY(-50%)",
+    },
+
+    '@media (max-width: 880px)': {
+        display: "block",
+        marginLeft: "0",
+      "&::before": {
+        display: 'none',
+      }
+    },
   },
+
   placeBlock: {
     display: "flex",
     flexDirection: "row",

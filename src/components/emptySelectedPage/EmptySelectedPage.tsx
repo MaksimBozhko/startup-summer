@@ -16,7 +16,7 @@ export const EmptySelectedPage = () => {
       <EmptySelectedIcon/>
       <p>{MESSAGES.NO_SELECTED_VACANCIES}</p>
       <NavLink to={"/"}>
-        <Button variant={"light"}>{MESSAGES.BACK_TO_SEARCH}</Button>
+        <Button>{MESSAGES.BACK_TO_SEARCH}</Button>
       </NavLink>
     </Flex>
   )

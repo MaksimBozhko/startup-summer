@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { Paper } from "@mantine/core"
+import { Box, Paper, Text, useMantineTheme } from "@mantine/core"
 import { NavLink } from "react-router-dom"
 
 import { useStyles } from "./styles"
@@ -9,6 +9,7 @@ import { ReactComponent as IconStar } from "../../../common/assets/img/star.svg"
 import { selectedVacancyActions } from "../../../store/slices/selected/slice"
 import { ItemType } from "../../../store/slices/vacancy/types"
 import { vacancyActions } from "../../../store/slices/vacancy/slice"
+import { H2 } from "../../../components/headlines/h2"
 
 type ItemPropsType = {
   vacancy: ItemType,
@@ -16,7 +17,6 @@ type ItemPropsType = {
 }
 
 export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
-
   const {
     id,
     profession,
@@ -52,21 +52,21 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
 
   return (
     <Paper className={classes.paper}>
-      <div>
-        <h2>
-          <NavLink to={`/vacancy/${id}`} className={classes.title}>{profession}</NavLink>
-        </h2>
-        <div className={classes.content}>
-          <div className={classes.info}>
-            <span className={classes.salary}>{salaryBlock}</span>
-            <span className={classes.schedule}>{type_of_work}</span>
-          </div>
-          <div className={classes.placeBlock}>
+      <Box>
+        <NavLink to={`/vacancy/${id}`} className={classes.title} >
+        <H2>{profession}</H2>
+        </NavLink>
+        <Box className={classes.content}>
+          <Box className={classes.info}>
+            <Text className={classes.salary}>{salaryBlock}</Text>
+            <Text className={classes.schedule}>{type_of_work}</Text>
+          </Box>
+          <Box className={classes.placeBlock}>
             <IconPlace />
-            <p className={classes.place}>{town}</p>
-          </div>
-        </div>
-      </div>
+            <Text className={classes.place}>{town}</Text>
+          </Box>
+        </Box>
+      </Box>
       <IconStar className={classes.star} onClick={clickStarHandler} />
     </Paper>
   )

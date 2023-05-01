@@ -7,14 +7,18 @@ import "./index.scss"
 import { store } from "./store"
 import { App } from "./app"
 import { ROUTES } from "./constant"
+import { MantineProvider } from "@mantine/core"
+import { globalStyle } from "./globalStyle"
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 )
 root.render(
-  <BrowserRouter basename={ROUTES.BASE_URL}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </BrowserRouter>
+  <MantineProvider withGlobalStyles withNormalizeCSS theme={globalStyle}>
+    <BrowserRouter basename={ROUTES.BASE_URL}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+  </MantineProvider>
 )

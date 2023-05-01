@@ -6,6 +6,11 @@
   .list{
     @include FlexCenter(row, center, center, 60px);
 
+    @media (max-width: 480px) {
+
+        gap: 10px;
+
+    }
     .item {
       @include FontStyle(500, 16px, 20px)
     }

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { IconSearch } from "@tabler/icons-react"
-import { Input } from "@mantine/core"
+import { Box, Input } from "@mantine/core"
 import { Button } from '@mantine/core';
 
 import { useStyles } from "./styles"
@@ -30,9 +30,8 @@ export const InputSearch = () => {
   }
 
   return <>
-    <form className={classes.form}>
+    <Box className={classes.form}>
       <Input
-        className={classes.input}
         size="lg"
         icon={<IconSearch />}
         placeholder="Введите название вакансии"
@@ -42,6 +41,6 @@ export const InputSearch = () => {
       <Button
         className={classes.button}
         onClick={onClickHandler}>Поиск</Button>
-    </form>
+    </Box>
   </>
 }

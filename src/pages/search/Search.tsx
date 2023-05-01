@@ -1,18 +1,21 @@
 import React from "react"
+import { Box, Flex } from "@mantine/core"
 
-import s from "./styles.module.scss"
 import { FilterBlock } from "../../features/filterBlock"
 import { InputSearch } from "../../components/input"
 import { VacancyList } from "../../features/vacancyList"
+import { useStyles } from "./styles"
+
 
 export const Search = () => {
+  const { classes } = useStyles()
   return (
-    <div className={s.content}>
+    <Flex className={classes.page}>
       <FilterBlock />
-      <div className={s.search}>
+      <Box className={classes.content}>
         <InputSearch />
         <VacancyList />
-      </div>
-    </div>
+      </Box>
+    </Flex>
   )
 }

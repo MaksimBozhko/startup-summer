@@ -5,16 +5,19 @@ import { useSelector } from "react-redux"
 import { Item } from "./vacancy"
 import { getSearchParams } from "../../common/utils/getSearchParams"
 import { useActions } from "../../hooks"
-import { ItemType } from "../../store/slices/vacancy/types"
 import { Pagination } from "../../components/pagination"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { MESSAGES } from "../../common/constant"
 import { getSelectPage, getTotalCount, getVacancies } from "../../store/slices/vacancy"
+import { Box, Flex } from "@mantine/core"
+import { getStatus } from "../../store/slices/app"
+import { Preloader } from "../../components/preloader/Preloader"
 
 export const VacancyList = () => {
   const selectPage = useSelector(getSelectPage)
   const vacancyList = useSelector(getVacancies)
   const totalCount = useSelector(getTotalCount)
+  const status = useSelector(getStatus)
   const { vacancies } = useActions(vacancyThunks)
 
   const [searchParams] = useSearchParams()
@@ -24,20 +27,23 @@ export const VacancyList = () => {
     vacancies({ keyword: search.keyword, page: selectPage })
   }, [vacancies, selectPage])
 
+  if (status === "loading") return <Preloader />
   return (
-    <div>
+    <Box>
       {
         vacancyList.length
-          ? <div>
+          ? <Box>
             {
-              vacancyList.map((el: ItemType) => <Item key={el.id}
-                                                      vacancy={el}
-                                                      titleColor={"var(--secondaryColor)"} />)
+              vacancyList.map((el) => <Item key={el.id}
+                                            vacancy={el}
+                                            titleColor={"var(--secondaryColor)"} />)
             }
             <Pagination totalUserCount={totalCount} currentPage={selectPage} />
-          </div>
-          : <p>{MESSAGES.NO_VACANCIES}</p>
+          </Box>
+          : <Flex
+            style={{ marginTop: "30px" }}
+            justify="center">{MESSAGES.NO_VACANCIES}</Flex>
       }
-    </div>
+    </Box>
   )
 }
