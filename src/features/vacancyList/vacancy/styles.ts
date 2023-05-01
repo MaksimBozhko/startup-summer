@@ -10,6 +10,7 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    gap: "30px",
   },
   title: {
     fontWeight: 600,
@@ -42,6 +43,7 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
     lineHeight: "19px",
   },
   star: {
+    minWidth: "22px",
     fill: colorIcon ? "#5E96FC" : "#FFFFFF",
     stroke: colorIcon ?  "#5E96FC": "#ACADB9"
   }
