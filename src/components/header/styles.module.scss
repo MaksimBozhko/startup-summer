@@ -8,5 +8,8 @@
   .container {
     @include PageContainer;
     @include FlexCenter(row, none, center);
+    @media (max-width: 500px) {
+      justify-content: space-between;
+    }
   }
 }
