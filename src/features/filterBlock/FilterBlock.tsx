@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Box, Button, Flex, MultiSelect, NumberInput, Paper, Text } from "@mantine/core"
-import { IconChevronDown } from "@tabler/icons-react"
+import { IconArrowDown, IconArrowUp, IconChevronDown } from "@tabler/icons-react"
 import { useSearchParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 
@@ -14,6 +14,7 @@ import { cataloguesThunks } from "../../store/slices/filter/slice"
 import { getCatalogues } from "../../store/slices/filter"
 import { H3 } from "../../components/headlines/h3"
 import { H4 } from "../../components/headlines/h4"
+import { cn } from "../../common/lib/cn"
 
 export const FilterBlock = () => {
   const { classes } = useStyles()
@@ -70,15 +71,21 @@ export const FilterBlock = () => {
     vacancies({ catalogues, payment_from: search.payment_from, payment_to: search.payment_to })
   }
 
+  const titleClass = cn(classes.title, { [classes.hide]: !visible })
+
   return (
     <Paper className={classes.paper}>
       <Flex className={classes.header}>
-        <H3>Фильтры</H3>
-        <Text
-          className={classes.show}
+        <Box
+          className={titleClass}
           onClick={() => setVisible(!visible)}>
-          {visible ? "Свернуть" : "Развернуть"}
-        </Text>
+          <H3>Фильтры</H3>
+          {
+            visible
+              ? <IconArrowDown className={classes.arrow} />
+              : <IconArrowUp className={classes.arrow} />
+          }
+        </Box>
         {
           visible && (
             <Flex align="center"

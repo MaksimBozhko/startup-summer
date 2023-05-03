@@ -1,18 +1,17 @@
 import React from "react"
+import { Box } from "@mantine/core"
 
-import s from "./styles.module.scss"
+import s from "./styles.module.css"
 import { ReactComponent as Logo } from "../../common/assets/img/logo.svg"
-import { Navigation } from "../navigation"
-import { Menu } from "../menu/Menu"
+import { Menu } from "../menu"
 
 export const Header = () => {
   return (
-    <div className={s.header}>
-      <div className={s.container}>
+    <Box className={s.header}>
+      <Box className={s.container}>
         <Logo />
-        {/*<Navigation />*/}
-        <Menu/>
-      </div>
-    </div>
+        <Menu />
+      </Box>
+    </Box>
   )
 }

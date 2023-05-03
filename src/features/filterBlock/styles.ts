@@ -7,6 +7,7 @@ export const useStyles = createStyles(() => ({
     borderRadius: "12px",
     padding: "20px",
     '@media (max-width: 750px)': {
+      minWidth: "280px",
       width: "100%"
     },
   },
@@ -19,6 +20,21 @@ export const useStyles = createStyles(() => ({
   header: {
     justifyContent: "space-between",
     paddingBottom: "12px"
+  },
+  title: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  hide: {
+    margin: "auto"
+  },
+  arrow: {
+    width: "20px",
+    display:"none",
+    '@media (max-width: 750px)': {
+      display: "block"
+    },
   },
   reset: {
     cursor: "pointer"
