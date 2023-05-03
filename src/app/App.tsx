@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import "./App.scss"
@@ -8,8 +8,16 @@ import { Search } from "../pages/search"
 import { Vacancy } from "../pages/vacancy"
 import { Selected } from "../pages/selected"
 import { NotFound } from "../pages/notFound"
+import { useActions } from "../hooks"
+import { appThunks } from "../store/slices/app/slice"
 
 export function App() {
+  const { initializeApp } = useActions(appThunks)
+
+  useEffect(() => {
+    initializeApp({})
+  }, [])
+
   return (
     <div className="main">
       <Header />
