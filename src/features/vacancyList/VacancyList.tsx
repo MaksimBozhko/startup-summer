@@ -5,10 +5,9 @@ import { useSelector } from "react-redux"
 import { Item } from "./vacancy"
 import { getSearchParams } from "../../common/utils/getSearchParams"
 import { useActions } from "../../hooks"
-import { Pagination } from "../../components/pagination"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { MESSAGES } from "../../common/constant"
-import { getSelectPage, getTotalCount, getVacancies } from "../../store/slices/vacancy"
+import { getSelectPage, getVacancies } from "../../store/slices/vacancy"
 import { Box, Flex } from "@mantine/core"
 import { getStatus } from "../../store/slices/app"
 import { Preloader } from "../../components/preloader/Preloader"
@@ -16,7 +15,6 @@ import { Preloader } from "../../components/preloader/Preloader"
 export const VacancyList = () => {
   const selectPage = useSelector(getSelectPage)
   const vacancyList = useSelector(getVacancies)
-  const totalCount = useSelector(getTotalCount)
   const status = useSelector(getStatus)
   const { vacancies } = useActions(vacancyThunks)
 
@@ -27,7 +25,7 @@ export const VacancyList = () => {
     vacancies({ keyword: search.keyword, page: selectPage })
   }, [vacancies, selectPage])
 
-  if (status === "loading") return <Preloader />
+  if (status === "loading") return <div style={{minHeight: "650px"}}><Preloader /> </div>
   return (
     <Box>
       {
@@ -38,7 +36,6 @@ export const VacancyList = () => {
                                             vacancy={el}
                                             titleColor={"var(--secondaryColor)"} />)
             }
-            <Pagination totalUserCount={totalCount} currentPage={selectPage} />
           </Box>
           : <Flex
             style={{ marginTop: "30px" }}

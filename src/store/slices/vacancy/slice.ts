@@ -38,6 +38,7 @@ const vacancy = createAppAsyncThunk<any, string>
   const selectedVacancyIds = getState().selected.map((vacancy) => vacancy.id)
   try {
     const res = await vacanciesAPI.vacancy(id)
+    console.log(res)
     const isSelected = selectedVacancyIds.includes(res.data.id)
     return {
       id: res.data.id,

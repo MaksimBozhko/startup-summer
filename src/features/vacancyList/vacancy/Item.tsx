@@ -34,9 +34,9 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
 
   const getSalary = () => {
     if (payment_from === 0 && payment_to !== 0) {
-      return <>з/п {payment_to} {currency}</>
+      return <>з/п от {payment_to} {currency}</>
     } else if (payment_from !== 0 && payment_to === 0) {
-      return <>з/п {payment_from} {currency}</>
+      return <>з/п до {payment_from} {currency}</>
     } else if (payment_from !== 0 && payment_to !== 0) {
       return <>з/п {payment_from} - {payment_to} {currency}</>
     } else {
