@@ -1,11 +1,13 @@
 import React, { useState } from "react"
-import { IconArrowBadgeLeft, IconArrowBadgeRight } from "@tabler/icons-react"
+import { useSearchParams } from "react-router-dom"
 
 import s from "./pagination.module.scss"
 import { useActions } from "../../hooks"
 import { vacancyActions } from "../../store/slices/vacancy/slice"
-import { useSearchParams } from "react-router-dom"
 import { getSearchParams } from "../../common/utils/getSearchParams"
+import { ReactComponent as ArrowLeftIcon} from "../../common/assets/img/arrowLeft.svg"
+import { ReactComponent as ArrowRightIcon} from "../../common/assets/img/arrowRight.svg"
+import { cn } from "../../common/lib/cn"
 
 type PaginationType = {
   totalUserCount: number
@@ -16,7 +18,6 @@ type PaginationType = {
 }
 
 export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1, portionSize = 3, onPageChange }: PaginationType) => {
-  console.log(currentPage)
   const { setSelectPage } = useActions(vacancyActions)
   const pageCount = Math.ceil(totalUserCount / pageSize)
   let pages = []
@@ -41,24 +42,24 @@ export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1,
   }
   return <div className={s.pagination}>
     <button
-      className={`${s.btn} ${s.page}`}
+      className={s.page}
       onClick={() => setPortionNumber(portionNumber - 1)}
       disabled={portionNumber <= 1}>
-      <IconArrowBadgeLeft />
+      <ArrowLeftIcon className={cn(s.icon, { [s.disabled]: portionNumber <= 1 })} />
     </button>
     {
       pages
         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
         .map((p) => <span key={p}
                           onClick={() => onClickSelectedPage(p)}
-                          className={currentPage == p ? `${s.selected} ${s.page}` : s.page}>
+                          className={cn(s.page, {[s.selected]: currentPage === p})}>
         {p}</span>)
     }
     <button
-      className={`${s.btn} ${s.page}`}
+      className={s.page}
       onClick={() => setPortionNumber(portionNumber + 1)}
       disabled={portionCount <= portionNumber}>
-      <IconArrowBadgeRight />
+      <ArrowRightIcon className={cn(s.icon, { [s.disabled]: portionCount <= portionNumber })} />
     </button>
   </div>
 }
