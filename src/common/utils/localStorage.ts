@@ -14,10 +14,10 @@ type SelectedState = {
   selected: ItemType[]
 }
 
-export const saveState = (state: SelectedState) => {
+export const saveState = (stateName: string, state: SelectedState) => {
   try {
     const serializedState = JSON.stringify(state)
-    localStorage.setItem("selected-vacancy", serializedState)
+    localStorage.setItem(stateName, serializedState)
   } catch {
     // ignore write errors
   }

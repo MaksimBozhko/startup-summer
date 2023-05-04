@@ -19,7 +19,7 @@ export const store = configureStore({
 })
 
 store.subscribe(() => {
-  saveState({ selected: store.getState().selected })
+  saveState("selected-vacancy", { selected: store.getState().selected })
 })
 
 export type RootState = ReturnType<typeof rootReducer>;

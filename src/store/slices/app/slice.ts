@@ -4,12 +4,13 @@ import axios, { AxiosError } from "axios"
 import { RequestStatusType } from "./types"
 import { createAppAsyncThunk } from "../../../common/utils/create-app-async-thunk"
 import { authAPI } from "./api"
+import { saveState } from "../../../common/utils/localStorage"
 
 export const initialState = {
   status: "idle" as RequestStatusType,
   error: null as string | null,
   isInitialized: false,
-  token: ""
+  refresh_token: ""
 }
 
 //thunks
@@ -23,14 +24,30 @@ const initializeApp = createAppAsyncThunk<any, any>
 	}
 })
 
+const refreshToken = createAppAsyncThunk<any, any>
+('app/refresh', async (_, { rejectWithValue, getState }) => {
+  const refresh_token = getState().app.refresh_token
+  try {
+    const res = await authAPI.refresh(refresh_token)
+    return res.data
+  } catch (e) {
+    return rejectWithValue(e)
+  }
+})
+
 const slice = createSlice({
   name: "app",
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder.addCase(initializeApp.fulfilled, (state, action) => {
-    	state.token = action.payload.access_token
+      saveState("token",  action.payload.access_token)
+      state.refresh_token = action.payload.refresh_token
       state.isInitialized = true
+    })
+    builder.addCase(refreshToken.fulfilled, (state, action) => {
+      saveState("token",  action.payload.access_token)
+      state.refresh_token = action.payload.refresh_token
     })
     builder.addMatcher(
       (action) => {
@@ -67,4 +84,4 @@ const slice = createSlice({
 
 export const appSlice = slice.reducer
 export const appActions = slice.actions
-export const appThunks = { initializeApp }
+export const appThunks = { initializeApp, refreshToken }
