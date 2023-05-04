@@ -2,11 +2,9 @@ import React, { useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 import s from "./pagination.module.scss"
-import { useActions } from "../../hooks"
-import { vacancyActions } from "../../store/slices/vacancy/slice"
 import { getSearchParams } from "../../common/utils/getSearchParams"
-import { ReactComponent as ArrowLeftIcon} from "../../common/assets/img/arrowLeft.svg"
-import { ReactComponent as ArrowRightIcon} from "../../common/assets/img/arrowRight.svg"
+import { ReactComponent as ArrowLeftIcon } from "../../common/assets/img/arrowLeft.svg"
+import { ReactComponent as ArrowRightIcon } from "../../common/assets/img/arrowRight.svg"
 import { cn } from "../../common/lib/cn"
 
 type PaginationType = {
@@ -17,8 +15,13 @@ type PaginationType = {
   onPageChange?: (pageNumber: number) => void
 }
 
-export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1, portionSize = 3, onPageChange }: PaginationType) => {
-  const { setSelectPage } = useActions(vacancyActions)
+export const Pagination = ({
+                             totalUserCount = 10,
+                             pageSize = 4,
+                             currentPage = 1,
+                             portionSize = 3,
+                             onPageChange
+                           }: PaginationType) => {
   const pageCount = Math.ceil(totalUserCount / pageSize)
   let pages = []
   for (let i = 1; i <= pageCount; i++) {
@@ -35,7 +38,6 @@ export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1,
 
   const onClickSelectedPage = (pageNumber: number) => {
     onPageChange && onPageChange(pageNumber)
-    setSelectPage(pageNumber)
     if (pageNumber) {
       setSearchParams({ ...search, page: pageNumber })
     }
@@ -52,7 +54,7 @@ export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1,
         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
         .map((p) => <span key={p}
                           onClick={() => onClickSelectedPage(p)}
-                          className={cn(s.page, {[s.selected]: currentPage === p})}>
+                          className={cn(s.page, { [s.selected]: currentPage == p })}>
         {p}</span>)
     }
     <button

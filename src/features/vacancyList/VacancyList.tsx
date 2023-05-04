@@ -7,13 +7,12 @@ import { getSearchParams } from "../../common/utils/getSearchParams"
 import { useActions } from "../../hooks"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { MESSAGES } from "../../common/constant"
-import { getSelectPage, getVacancies } from "../../store/slices/vacancy"
+import { getVacancies } from "../../store/slices/vacancy"
 import { Box, Flex } from "@mantine/core"
 import { getStatus } from "../../store/slices/app"
 import { Preloader } from "../../components/preloader/Preloader"
 
 export const VacancyList = () => {
-  const selectPage = useSelector(getSelectPage)
   const vacancyList = useSelector(getVacancies)
   const status = useSelector(getStatus)
   const { vacancies } = useActions(vacancyThunks)
@@ -22,10 +21,10 @@ export const VacancyList = () => {
   const search = getSearchParams(searchParams)
 
   useEffect(() => {
-    vacancies({ keyword: search.keyword, page: selectPage })
-  }, [vacancies, selectPage])
+    vacancies({ keyword: search.keyword, page: search.page })
+  }, [vacancies, search.page])
 
-  if (status === "loading") return <div style={{minHeight: "650px"}}><Preloader /> </div>
+  if (status === "loading") return <div style={{ minHeight: "650px" }}><Preloader /></div>
   return (
     <Box>
       {
