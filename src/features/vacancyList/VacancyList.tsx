@@ -23,7 +23,7 @@ export const VacancyList = () => {
   const search = getSearchParams(searchParams)
 
   useEffect(() => {
-    vacancies({ keyword: search.keyword, page: search.page }).unwrap().catch((res) => {
+    vacancies({ keyword: search.keyword, page: search.page }).unwrap().catch(() => {
       refreshToken({})
     })
   }, [vacancies, search.page])
@@ -36,6 +36,7 @@ export const VacancyList = () => {
           ? <Box>
             {
               vacancyList.map((el) => <Item key={el.id}
+                                            data-elem={`vacancy-${el.id}`}
                                             vacancy={el}
                                             titleColor={"var(--secondaryColor)"} />)
             }

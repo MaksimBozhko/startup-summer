@@ -9,7 +9,6 @@ import { useActions } from "../../hooks"
 import { vacancyThunks } from "../../store/slices/vacancy/slice"
 import { getStatus } from "../../store/slices/app"
 import { useStyles } from "./styles"
-import { getContentText } from "../../common/utils/getContentText"
 import { Preloader } from "../../components/preloader/Preloader"
 
 export const Vacancy = () => {
@@ -22,8 +21,6 @@ export const Vacancy = () => {
   const params = useParams()
   const id = params.id || ""
 
-  const text = getContentText(vacancyItem.firm_activity, vacancyItem.vacancyRichText)
-
   useEffect(() => {
     vacancy(id)
   }, [vacancy, id])
@@ -32,9 +29,10 @@ export const Vacancy = () => {
   return (
     <Box className={classes.page}>
       <Item vacancy={vacancyItem}
+            data-elem={`vacancy-${id}`}
             titleColor={"var(--primaryColor)"} />
       <Paper className={classes.content}>
-        <Box dangerouslySetInnerHTML={{ __html: text }} />
+        <Box dangerouslySetInnerHTML={{ __html: vacancyItem.vacancyRichText }} />
       </Paper>
     </Box>
   )

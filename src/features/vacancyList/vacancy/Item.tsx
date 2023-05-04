@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { Box, Paper, Text, useMantineTheme } from "@mantine/core"
+import { Box, Paper, Text } from "@mantine/core"
 import { NavLink } from "react-router-dom"
 
 import { useStyles } from "./styles"
@@ -53,8 +53,8 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
   return (
     <Paper className={classes.paper}>
       <Box>
-        <NavLink to={`/vacancy/${id}`} className={classes.title} >
-        <H2>{profession}</H2>
+        <NavLink to={`/vacancy/${id}`} className={classes.title}>
+          <H2>{profession}</H2>
         </NavLink>
         <Box className={classes.content}>
           <Box className={classes.info}>
@@ -67,7 +67,10 @@ export const Item: FC<ItemPropsType> = ({ vacancy, titleColor }) => {
           </Box>
         </Box>
       </Box>
-      <IconStar className={classes.star} onClick={clickStarHandler} />
+      <IconStar
+        data-elem={`vacancy-${vacancy.id}-shortlist-button`}
+        className={classes.star}
+        onClick={clickStarHandler} />
     </Paper>
   )
 }

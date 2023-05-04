@@ -32,7 +32,7 @@ export const FilterBlock = () => {
   useEffect(() => {
     setValue(search.industry ? search.industry.split("-") : [])
     catalogues({})
-  }, [])
+  }, [catalogues])
 
   const multiSelectOptions = cataloguesList.map((el: OptionsType) => el.title_rus)
 
@@ -108,29 +108,35 @@ export const FilterBlock = () => {
             <Box>
               <H4 className={classes.text}>Отрасль</H4>
               <MultiSelect
+                data-elem="industry-select"
                 data={multiSelectOptions}
                 placeholder="Выберете отрасль"
                 rightSection={<IconChevronDown size="1rem" />}
                 value={value}
                 onChange={handleChange}
-
               />
             </Box>
             <Box>
               <H4 className={classes.text}>Оклад</H4>
               <NumberInput
+                data-elem="salary-from-input"
                 placeholder="От"
                 className={classes.select}
                 value={search.payment_from ? +search.payment_from : ""}
                 onChange={paymentFromChange}
               />
               <NumberInput
+                data-elem="salary-to-input"
                 placeholder="До"
                 value={search.payment_to ? +search.payment_to : ""}
                 onChange={paymentToChange}
               />
             </Box>
-            <Button className={classes.btn} onClick={applyHandler}>Применить</Button>
+            <Button
+              data-elem="search-button"
+              className={classes.btn}
+              onClick={applyHandler}
+            >Применить</Button>
           </Box>
         )
       }

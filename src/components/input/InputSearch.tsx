@@ -33,6 +33,7 @@ export const InputSearch = () => {
   return <>
     <Box className={classes.form}>
       <Input
+        data-elem="search-input"
         size="lg"
         icon={<IconSearch />}
         placeholder="Введите название вакансии"
@@ -40,6 +41,7 @@ export const InputSearch = () => {
         value={value}
       />
       <Button
+        data-elem="search-button"
         className={classes.button}
         onClick={onClickHandler}>Поиск</Button>
     </Box>

@@ -36,6 +36,7 @@ export const Selected = () => {
             {
               vacanciesShow.map((vacancy) => <Item
                 key={vacancy.id}
+                data-elem={`vacancy-${vacancy.id}`}
                 vacancy={vacancy}
                 titleColor={"var(--secondaryColor)"} />)
             }
