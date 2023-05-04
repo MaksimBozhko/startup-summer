@@ -22,7 +22,8 @@ export const InputSearch = () => {
     if (e.currentTarget.value) {
       setSearchParams({ ...search, keyword: e.currentTarget.value })
     } else {
-      setSearchParams({})
+      searchParams.delete('keyword')
+      setSearchParams(searchParams);
     }
   }
   const onClickHandler = () => {

@@ -41,21 +41,24 @@ export const FilterBlock = () => {
     if (selected.length) {
       setSearchParams({ ...search, industry: selected.join("-") })
     } else {
-      setSearchParams({})
+      searchParams.delete("industry")
+      setSearchParams(searchParams)
     }
   }
   const paymentFromChange = (value: number | "") => {
     if (value !== "") {
       setSearchParams({ ...search, payment_from: value })
     } else {
-      setSearchParams({})
+      searchParams.delete("payment_from")
+      setSearchParams(searchParams)
     }
   }
   const paymentToChange = (value: number | "") => {
     if (value !== "") {
       setSearchParams({ ...search, payment_to: value })
     } else {
-      setSearchParams({})
+      searchParams.delete("payment_to")
+      setSearchParams(searchParams)
     }
   }
   const resetFilterHandler = () => {
