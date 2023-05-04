@@ -10,14 +10,19 @@ import { Selected } from "../pages/selected"
 import { NotFound } from "../pages/notFound"
 import { useActions } from "../hooks"
 import { appThunks } from "../store/slices/app/slice"
+import { useSelector } from "react-redux"
+import { getIsInitialized } from "../store/slices/app"
+import { Preloader } from "../components/preloader/Preloader"
 
 export function App() {
   const { initializeApp } = useActions(appThunks)
+  const isInitialized = useSelector(getIsInitialized)
 
   useEffect(() => {
     initializeApp({})
   }, [])
 
+  if (!isInitialized) return <Preloader/>
   return (
     <div className="main">
       <Header />

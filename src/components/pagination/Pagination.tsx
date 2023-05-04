@@ -4,15 +4,19 @@ import { IconArrowBadgeLeft, IconArrowBadgeRight } from "@tabler/icons-react"
 import s from "./pagination.module.scss"
 import { useActions } from "../../hooks"
 import { vacancyActions } from "../../store/slices/vacancy/slice"
+import { useSearchParams } from "react-router-dom"
+import { getSearchParams } from "../../common/utils/getSearchParams"
 
 type PaginationType = {
   totalUserCount: number
   currentPage: number
   portionSize?: number
   pageSize?: number
+  onPageChange?: (pageNumber: number) => void
 }
 
-export const Pagination = ({ totalUserCount = 10, pageSize = 3, currentPage, portionSize = 3 }: PaginationType) => {
+export const Pagination = ({ totalUserCount = 10, pageSize = 4, currentPage = 1, portionSize = 3, onPageChange }: PaginationType) => {
+  console.log(currentPage)
   const { setSelectPage } = useActions(vacancyActions)
   const pageCount = Math.ceil(totalUserCount / pageSize)
   let pages = []
@@ -20,13 +24,20 @@ export const Pagination = ({ totalUserCount = 10, pageSize = 3, currentPage, por
     pages.push(i)
   }
 
+  const [searchParams, setSearchParams] = useSearchParams()
+  const search = getSearchParams(searchParams)
+
   const portionCount = Math.ceil(pageCount / portionSize)
   const [portionNumber, setPortionNumber] = useState(1)
   const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
   const rightPortionPageNumber = portionNumber * portionSize
 
   const onClickSelectedPage = (pageNumber: number) => {
+    onPageChange && onPageChange(pageNumber)
     setSelectPage(pageNumber)
+    if (pageNumber) {
+      setSearchParams({ ...search, page: pageNumber })
+    }
   }
   return <div className={s.pagination}>
     <button
