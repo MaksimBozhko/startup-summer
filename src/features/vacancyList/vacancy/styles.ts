@@ -29,6 +29,7 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
     fontSize: "16px",
     lineHeight: "20px",
     position: "relative",
+    marginRight: "24px",
     "&::after": {
       content: "''",
       position: "absolute",
@@ -40,31 +41,18 @@ export const useStyles = createStyles((theme, { titleColor, colorIcon }: stylesP
       right: "-14px",
       transform: "translateY(-50%)",
     },
+    '@media (max-width: 550px)': {
+      display: "block",
+      marginLeft: "0",
+      "&::after": {
+        display: 'none',
+      }
+    },
   },
   schedule: {
     display: "inline-block",
     lineHeight: "20px",
     position: "relative",
-    marginLeft: "24px",
-    // "&::before": {
-    //   content: "''",
-    //   position: "absolute",
-    //   width: "4px",
-    //   height: "4px",
-    //   borderRadius: "50%",
-    //   backgroundColor: "#ACADB9",
-    //   top: "50%",
-    //   left: "-12px",
-    //   transform: "translateY(-50%)",
-    // },
-
-    // '@media (max-width: 880px)': {
-    //     display: "block",
-    //     marginLeft: "0",
-    //   "&::before": {
-    //     display: 'none',
-    //   }
-    // },
   },
 
   placeBlock: {
