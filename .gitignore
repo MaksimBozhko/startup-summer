@@ -12,6 +12,7 @@
 /build
 /.idea
 /.prettierignore
+/ eslint-disable-next-line
 
 # misc
 .DS_Store
